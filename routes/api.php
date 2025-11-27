@@ -68,7 +68,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/my-posts', MyPostsAction::class);
  
     
-   
+    Route::post('/articles', CreateArticleAction::class);
    
     Route::put('/articles/{id}', UpdateArticleAction::class);
     Route::delete('/articles/{id}', DeleteArticleAction::class);
@@ -90,7 +90,7 @@ Route::middleware(['auth:api', 'role:admin' ])->group(function () {
     Route::post('/admin/comments/{id}/approve',MarkCommentAsApprovedAction::class);
     Route::get('/admin/comments', GetAdminCommentsAction::class); 
     Route::delete('/admin/comments/{id}', deleteCommentAction::class);
-    Route::post('/articles', CreateArticleAction::class);
+    Route::post('/admin/articles', CreateArticleAction::class);
     Route::get('/admin/users', GetUsersAction::class);
     Route::post('/admin/users/{userId}/assign-role', AssignRoleToUserAction::class);
     Route::get('/admin/roles', [RoleActions::class, 'getAllRoles']);
