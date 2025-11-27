@@ -13,8 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Article::class => ArticlePolicy::class,
     ];
+    
 
     /**
      * Register any authentication / authorization services.

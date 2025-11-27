@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use  HasFactory, Notifiable;
+    use  HasFactory, Notifiable , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +21,13 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password'
+      
     ];
+
+    protected $appends = ['role_name'];
+
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -30,10 +36,18 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function getRoleNameAttribute()
+{
+    return $this->roles->pluck('name');
+}
+
     public function articles()
     {
         return $this->hasMany(Article::class, 'author_id');
     }
+
+    public function isSuperAdmin() { return $this->role === 'admin'; }
+    public function isEditor() { return $this->role === 'editor'; }
 
     public function ratings()
     {
