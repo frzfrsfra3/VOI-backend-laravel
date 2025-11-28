@@ -26,8 +26,8 @@ Follow these steps to set up and run the project locally:
 Copy code
 
 ```bash
-git clone https://github.com/frzfrsfra3/backend_devteam.git
-cd backend_devteam
+git clone "destination folder"
+cd "destination folder"
 ```
 #### 2.	Install Dependencies:
 
@@ -51,7 +51,7 @@ php artisan jwt:secret
 ```
 #### 5.	Run Migrations :
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 #### 6.	Start the Laravel Development Server:
 
